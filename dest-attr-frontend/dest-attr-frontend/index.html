@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="./src/index.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header>
+      <div class="nav-bar">
+        <h1 class="logo"> Travel Destinations</h1>
+          <nav>
+          <ul>
+            <li><a href="#" onclick='getDestinations();return false;'>All Destinations</a></li>
+            <li><a href="#" onclick='displayCreateDestinationForm();return false;'>New Destination</a></li>
+            <li><a href="#" onclick='displayCreateAttractionForm();return false;'>New Attraction</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Add our Destinations -->
+      <div class="dest-list" id="dest-list-id">
+        <ul>
+
+        </ul>
+      </div>
+      <div class="dest-form">
+        <form onsubmit="createDestination();return false;">
+          <div class="class="dest-form-row">
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+          </div>
+          <div class="dest-form-row">
+            <label for="country">Country:</label>
+            <input type="text" id="country">
+          </div>
+          <div class="dest-form-row">
+            <label for="language">Language:</label>
+            <input type="text" id="language">
+          </div>
+          <div class="dest-form-row">
+            <label for="currency">Currency:</label>
+            <input type="text" id="currency">
+          </div>
+          <div class="dest-form-row">
+            <input type ="submit" value="Add New Destination">
+          </div> 
+        </form>
+      </div>
+
+    </main>
+
+    
+  </body>
+</html>
