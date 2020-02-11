@@ -1,5 +1,6 @@
 # destinations-and-attractions-js-rails
 
+# this is a test
 //CSS
 
 main {

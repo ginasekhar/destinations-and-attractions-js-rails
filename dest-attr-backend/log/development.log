@@ -930,3 +930,21 @@ Processing by DestinationsController#index as */*
 Completed 200 OK in 13ms (Views: 11.3ms | ActiveRecord: 1.0ms | Allocations: 7438)
 
 
+Started GET "/destinations" for ::1 at 2020-02-11 09:37:53 -0500
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.5ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.8ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (30.69ms)
+Completed 200 OK in 60ms (Views: 51.2ms | ActiveRecord: 2.9ms | Allocations: 24275)
+
+
