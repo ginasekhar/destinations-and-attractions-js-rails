@@ -1,3 +1,4 @@
+
 body {
     margin: 0;
     padding: 0;
@@ -18,13 +19,60 @@ body {
     margin: 0;
   }
   
-  main {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-gap: 20px;
-    padding-top: 10px;
-    padding-bottom: 30px;
+  nav-bar {
+    width: 80%;
+    margin:0 auto;
+  }
+
+  .nav-bar {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  nav {
+    float: right;
+  }
+  
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  nav li {
+    display: inline-block;
+    margin-left: 70px;
+    padding-top: 23px;
+  
+    position: relative;
+  }
+  
+  nav a {
+    color: #444;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  
+  nav a:hover {
+    color: #000;
+  }
+  
+  nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background-color: #444;
+  
+    position: absolute;
+    top: 0;
+    width: 0%;
+  
+    transition: all ease-in-out 250ms;
+  }
+  
+  nav a:hover::before {
+    width: 100%;
   }
   
   div.card {
@@ -43,7 +91,7 @@ body {
   }
   
   li {
-    font-size: 1.05em;
+    font-size: 1.5em;
     list-style: none;
     padding-right: 20px;
   }
@@ -60,10 +108,7 @@ body {
     background-color: rgb(226, 168, 43);
   }
   
-  nav-bar {
-    width: 80%;
-    margin:0 auto;
-  }
+  
 
   @media only screen and (min-width: 500px) {
     main {
@@ -78,10 +123,7 @@ body {
   }
 
  
-  .nav-bar {
-	width: 80%;
-	margin: 0 auto;
-}
+  
 
 
 
@@ -91,48 +133,29 @@ body {
   color: #6C4719
 }
 
-nav {
-  float: right;
+
+
+.column-layout {
+  max-width: 1300px;
+  background-color: #FFF;
+  margin: 40px auto 0 auto;
+  line-height: 1.65;
+  padding: 20px 50px;
+  display: flex;
 }
 
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.dest-list{
+  flex: 3;
+  order: 1;
 }
 
-nav li {
-  display: inline-block;
-  margin-left: 70px;
-  padding-top: 23px;
-
-  position: relative;
+#dest-form {
+  flex: 1;
+  order: 2;
 }
 
-nav a {
-  color: #444;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 14px;
+#dest-details {
+  flex: 1;
+  order: 3;
 }
 
-nav a:hover {
-  color: #000;
-}
-
-nav a::before {
-  content: '';
-  display: block;
-  height: 5px;
-  background-color: #444;
-
-  position: absolute;
-  top: 0;
-  width: 0%;
-
-  transition: all ease-in-out 250ms;
-}
-
-nav a:hover::before {
-  width: 100%;
-}

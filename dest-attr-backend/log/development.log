@@ -1,0 +1,932 @@
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateDestinations (20200210215908)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "destinations" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "country" varchar, "language" varchar, "currency" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200210215908"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateAttractions (20200210220332)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "attractions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "category" varchar, "reservations_required" boolean, "cost" integer, "destination_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_7592e6c31f"
+FOREIGN KEY ("destination_id")
+  REFERENCES "destinations" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_attractions_on_destination_id" ON "attractions" ("destination_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200210220332"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-02-10 22:12:53.480077"], ["updated_at", "2020-02-10 22:12:53.480077"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/destinations" for ::1 at 2020-02-10 17:21:43 -0500
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/Users/ginasekhar/Development/code/destinations-and-attractions-js-rails/dest-attr-backend/app/controllers/destinations_controller.rb:16: syntax error, unexpected ',', expecting =>
+...stination.errors.full_messages, status: 422 }
+...                              ^
+/Users/ginasekhar/Development/code/destinations-and-attractions-js-rails/dest-attr-backend/app/controllers/destinations_controller.rb:63: syntax error, unexpected end-of-input, expecting end):
+  
+app/controllers/destinations_controller.rb:16: syntax error, unexpected ',', expecting =>
+app/controllers/destinations_controller.rb:63: syntax error, unexpected end-of-input, expecting end
+app/controllers/destinations_controller.rb:16: syntax error, unexpected ',', expecting =>
+app/controllers/destinations_controller.rb:63: syntax error, unexpected end-of-input, expecting end
+Started GET "/favicon.ico" for ::1 at 2020-02-10 17:21:43 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.1) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/destinations" for ::1 at 2020-02-10 17:33:42 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DestinationsController#index as HTML
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (24.65ms)
+Completed 200 OK in 74ms (Views: 56.3ms | ActiveRecord: 1.3ms | Allocations: 23673)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/destinations" for ::1 at 2020-02-10 17:52:53 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by DestinationsController#index as HTML
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (6.87ms)
+Completed 200 OK in 9ms (Views: 8.3ms | ActiveRecord: 0.7ms | Allocations: 6586)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 17:52:59 -0500
+Processing by DestinationsController#index as HTML
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (8.4ms)
+Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.7ms | Allocations: 6549)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 17:53:05 -0500
+Processing by DestinationsController#index as HTML
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.4ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (8.81ms)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 1.0ms | Allocations: 6549)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" ORDER BY "destinations"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ? LIMIT ?[0m  [["destination_id", 1], ["LIMIT", 11]]
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" ORDER BY "destinations"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mDestination Load (0.3ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" ORDER BY "destinations"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ? LIMIT ?[0m  [["destination_id", 1], ["LIMIT", 11]]
+Started GET "/destinations" for ::1 at 2020-02-10 17:55:02 -0500
+Processing by DestinationsController#index as HTML
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (6.81ms)
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.7ms | Allocations: 6529)
+
+
+  [1m[36mAttraction Load (0.4ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" WHERE "destinations"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAttraction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "attractions" WHERE "attractions"."name" = ? LIMIT ?[0m  [["name", "Eiffel Tower"], ["LIMIT", 1]]
+  [1m[36mAttraction Create (1.6ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "category", "reservations_required", "cost", "destination_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Eiffel Tower"], ["category", "Architectural Buildings"], ["reservations_required", 1], ["cost", 30], ["destination_id", 1], ["created_at", "2020-02-10 22:55:56.896054"], ["updated_at", "2020-02-10 22:55:56.896054"]]
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" WHERE "destinations"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAttraction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "attractions" WHERE "attractions"."name" = ? LIMIT ?[0m  [["name", "The Louvre"], ["LIMIT", 1]]
+  [1m[36mAttraction Create (0.7ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "category", "reservations_required", "cost", "destination_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "The Louvre"], ["category", "Museums"], ["reservations_required", 1], ["cost", 50], ["destination_id", 1], ["created_at", "2020-02-10 22:56:21.638757"], ["updated_at", "2020-02-10 22:56:21.638757"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mDestination Load (0.3ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" WHERE "destinations"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAttraction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "attractions" WHERE "attractions"."name" = ? LIMIT ?[0m  [["name", "Luxembourg Gardens"], ["LIMIT", 1]]
+  [1m[36mAttraction Create (0.7ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "category", "reservations_required", "cost", "destination_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Luxembourg Gardens"], ["category", "Parks & Gardens"], ["reservations_required", 0], ["cost", 0], ["destination_id", 1], ["created_at", "2020-02-10 22:57:02.818660"], ["updated_at", "2020-02-10 22:57:02.818660"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mDestination Load (0.4ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" WHERE "destinations"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAttraction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "attractions" WHERE "attractions"."name" = ? LIMIT ?[0m  [["name", "Statue of Liberty"], ["LIMIT", 1]]
+  [1m[36mAttraction Create (0.7ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "category", "reservations_required", "cost", "destination_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Statue of Liberty"], ["category", "Landmarks"], ["reservations_required", 1], ["cost", 25], ["destination_id", 2], ["created_at", "2020-02-10 22:57:43.352439"], ["updated_at", "2020-02-10 22:57:43.352439"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mDestination Load (0.3ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations" WHERE "destinations"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAttraction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "attractions" WHERE "attractions"."name" = ? LIMIT ?[0m  [["name", "Central Park"], ["LIMIT", 1]]
+  [1m[36mAttraction Create (0.8ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "category", "reservations_required", "cost", "destination_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Central Park"], ["category", "Parks & Gardens"], ["reservations_required", 0], ["cost", 0], ["destination_id", 2], ["created_at", "2020-02-10 22:58:02.285454"], ["updated_at", "2020-02-10 22:58:02.285454"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/destinations" for ::1 at 2020-02-10 17:58:12 -0500
+Processing by DestinationsController#index as HTML
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (27.23ms)
+Completed 200 OK in 30ms (Views: 28.4ms | ActiveRecord: 1.0ms | Allocations: 14530)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 21:22:56 -0500
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (1.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (1.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.4ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (47.0ms)
+Completed 200 OK in 85ms (Views: 71.2ms | ActiveRecord: 4.3ms | Allocations: 24306)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 21:23:52 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (7.96ms)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.6ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 21:24:52 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (8.46ms)
+Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.8ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 21:24:55 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.17ms)
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 0.7ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 21:26:51 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.83ms)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.9ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 21:28:45 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.4ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.38ms)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 1.2ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:00:57 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.6ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.9ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.86ms)
+Completed 200 OK in 14ms (Views: 11.4ms | ActiveRecord: 2.1ms | Allocations: 7438)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:29:55 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.8ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (1.0ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (12.12ms)
+Completed 200 OK in 16ms (Views: 12.9ms | ActiveRecord: 2.3ms | Allocations: 7438)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:32:20 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (8.03ms)
+Completed 200 OK in 29ms (Views: 27.4ms | ActiveRecord: 0.7ms | Allocations: 7398)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:32:47 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.5ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (12.3ms)
+Completed 200 OK in 15ms (Views: 14.0ms | ActiveRecord: 1.1ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:34:04 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.09ms)
+Completed 200 OK in 12ms (Views: 10.3ms | ActiveRecord: 0.9ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:34:08 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.29ms)
+Completed 200 OK in 12ms (Views: 10.6ms | ActiveRecord: 0.8ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:34:20 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.65ms)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.7ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:52:02 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (1.0ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.9ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.98ms)
+Completed 200 OK in 13ms (Views: 10.8ms | ActiveRecord: 2.2ms | Allocations: 7438)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:52:03 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.3ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.39ms)
+Completed 200 OK in 13ms (Views: 11.4ms | ActiveRecord: 1.1ms | Allocations: 7395)
+
+
+Started GET "/" for ::1 at 2020-02-10 23:53:27 -0500
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/ginasekhar/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/ginasekhar/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 7.0ms | Allocations: 316)
+Completed 200 OK in 18ms (Views: 10.2ms | ActiveRecord: 0.0ms | Allocations: 1597)
+
+
+Started GET "/index.html" for ::1 at 2020-02-10 23:53:36 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/index.html"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.1) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/destinations" for ::1 at 2020-02-10 23:53:58 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (7.19ms)
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.6ms | Allocations: 7463)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:54:49 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (11.71ms)
+Completed 200 OK in 14ms (Views: 12.7ms | ActiveRecord: 1.0ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:55:29 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.65ms)
+Completed 200 OK in 12ms (Views: 11.0ms | ActiveRecord: 0.7ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:55:34 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.43ms)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.7ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:56:45 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.57ms)
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 1.0ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-10 23:58:11 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (14.03ms)
+Completed 200 OK in 17ms (Views: 16.0ms | ActiveRecord: 0.9ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 06:50:27 -0500
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (1.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (1.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (43.2ms)
+Completed 200 OK in 79ms (Views: 66.3ms | ActiveRecord: 3.8ms | Allocations: 24273)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 06:54:20 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.4ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.27ms)
+Completed 200 OK in 12ms (Views: 10.7ms | ActiveRecord: 0.9ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 06:54:36 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (8.81ms)
+Completed 200 OK in 11ms (Views: 9.8ms | ActiveRecord: 0.7ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 06:55:19 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.3ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.0ms)
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 0.8ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 06:56:13 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.4ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (8.99ms)
+Completed 200 OK in 12ms (Views: 10.6ms | ActiveRecord: 1.0ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 06:57:30 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.8ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.03ms)
+Completed 200 OK in 16ms (Views: 13.5ms | ActiveRecord: 1.6ms | Allocations: 7395)
+
+
+Started GET "/index.html" for ::1 at 2020-02-11 07:10:35 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+ActionController::RoutingError (No route matches [GET] "/index.html"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.1) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/index.html" for ::1 at 2020-02-11 07:10:57 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/index.html"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.1) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/index.html" for ::1 at 2020-02-11 07:10:59 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/index.html"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.1) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.1) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/destinations" for ::1 at 2020-02-11 07:11:46 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (19.49ms)
+Completed 200 OK in 39ms (Views: 33.2ms | ActiveRecord: 1.9ms | Allocations: 24364)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:14:44 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.62ms)
+Completed 200 OK in 12ms (Views: 11.0ms | ActiveRecord: 0.9ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:16:57 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.3ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (11.47ms)
+Completed 200 OK in 14ms (Views: 13.0ms | ActiveRecord: 0.9ms | Allocations: 7396)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:20:34 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (6.47ms)
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.5ms | Allocations: 7413)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:20:51 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (11.41ms)
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.9ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:21:51 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.1ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.18ms)
+Completed 200 OK in 12ms (Views: 11.1ms | ActiveRecord: 0.9ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:22:09 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.4ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.55ms)
+Completed 200 OK in 13ms (Views: 11.5ms | ActiveRecord: 1.0ms | Allocations: 7414)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:22:31 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.23ms)
+Completed 200 OK in 12ms (Views: 11.1ms | ActiveRecord: 1.0ms | Allocations: 7395)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:39:34 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.14ms)
+Completed 200 OK in 12ms (Views: 10.5ms | ActiveRecord: 0.8ms | Allocations: 7438)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 07:40:00 -0500
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.3ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (11.33ms)
+Completed 200 OK in 14ms (Views: 12.8ms | ActiveRecord: 1.0ms | Allocations: 7396)
+
+
+Started GET "/destinations" for ::1 at 2020-02-11 09:01:02 -0500
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by DestinationsController#index as */*
+  [1m[36mDestination Load (0.2ms)[0m  [1m[34mSELECT "destinations".* FROM "destinations"[0m
+  ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.3ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 1]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 2]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.1ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 3]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers]   [1m[36mAttraction Load (0.2ms)[0m  [1m[34mSELECT "attractions".* FROM "attractions" WHERE "attractions"."destination_id" = ?[0m  [["destination_id", 4]]
+[active_model_serializers]   ↳ app/controllers/destinations_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.35ms)
+Completed 200 OK in 13ms (Views: 11.3ms | ActiveRecord: 1.0ms | Allocations: 7438)
+
+

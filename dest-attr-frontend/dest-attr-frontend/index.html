@@ -21,35 +21,43 @@
 
     <main>
       <!-- Add our Destinations -->
-      <div class="dest-list" id="dest-list-id">
-        <ul>
+      <div class="column-layout" >
+        <div class="dest-list" id="dest-list-container">
+          <ul>
 
-        </ul>
-      </div>
-      <div class="dest-form">
-        <form onsubmit="createDestination();return false;">
-          <div class="class="dest-form-row">
-            <label for="name">Name:</label>
-            <input type="text" id="name">
-          </div>
-          <div class="dest-form-row">
-            <label for="country">Country:</label>
-            <input type="text" id="country">
-          </div>
-          <div class="dest-form-row">
-            <label for="language">Language:</label>
-            <input type="text" id="language">
-          </div>
-          <div class="dest-form-row">
-            <label for="currency">Currency:</label>
-            <input type="text" id="currency">
-          </div>
-          <div class="dest-form-row">
-            <input type ="submit" value="Add New Destination">
-          </div> 
-        </form>
-      </div>
+          </ul>
+        </div>
+        <div id="dest-form">
+          <form onsubmit="createDestination();return false;">
+            <div class="dest-form-row">
+              <label for="name">Name:</label>
+              <input type="text" id="name">
+            </div>
+            <div class="dest-form-row">
+              <label for="country">Country:</label>
+              <input type="text" id="country">
+            </div>
+            <div class="dest-form-row">
+              <label for="language">Language:</label>
+              <input type="text" id="language">
+            </div>
+            <div class="dest-form-row">
+              <label for="currency">Currency:</label>
+              <input type="text" id="currency">
+            </div>
+            <div class="dest-form-row">
+              <input type ="submit" value="Add New Destination">
+            </div> 
+          </form>
+        </div>
+        <div id="dest-details">
+          <div class="attr-list" id="attr-list-container">
+            <ul>
 
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
 
     
