@@ -14,19 +14,24 @@
             <li><a href="#" onclick='getDestinations();return false;'>All Destinations</a></li>
             <li><a href="#" onclick='displayCreateDestinationForm();return false;'>New Destination</a></li>
             <li><a href="#" onclick='displayCreateAttractionForm();return false;'>New Attraction</a></li>
+            <li><button id="add-dest-btn">Add New Destination</button></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main>
-      <!-- Add our Destinations -->
+      <!-- column-layout is the wrapper for all 3 sections -->
+      
       <div class="column-layout" >
+        <!-- dest-list is the list of all destinations in database -->
         <div class="dest-list" id="dest-list-container">
           <ul>
 
           </ul>
         </div>
+
+        <!-- dest-form is the form for adding or updating destinations -->
         <div id="dest-form">
           <form onsubmit="createDestination();return false;">
             <div class="dest-form-row">
@@ -50,14 +55,21 @@
             </div> 
           </form>
         </div>
-        <div id="dest-details">
+
+        <!-- dest-details is the container that will show the details of destination 
+          and list all associated attractions -->
+
+        <div class="dest-details">
+          <p></p>
           <div class="attr-list" id="attr-list-container">
             <ul>
 
-            </ul>
+            </ul> 
           </div>
         </div>
+
       </div>
+
     </main>
 
     
