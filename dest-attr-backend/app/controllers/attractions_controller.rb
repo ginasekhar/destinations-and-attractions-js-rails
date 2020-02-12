@@ -1,5 +1,5 @@
 class AttractionsController < ApplicationController
-  before_action :set_attraction, only: [:show, :update, :destroy]
+  # before_action :set_attraction, only: [:show, :update, :destroy]
 
   # GET /attractions
   def index
@@ -35,6 +35,9 @@ class AttractionsController < ApplicationController
 
   # DELETE /attractions/1
   def destroy
+
+    attraction = Attraction.find_by(id: params[:id]);
+    
     attraction.destroy
   end
 

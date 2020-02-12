@@ -1,5 +1,5 @@
 class DestinationsController < ApplicationController
-  before_action :set_destination, only: [:show, :update, :destroy]
+  # before_action :set_destination, only: [:show, :update, :destroy]
 
   # GET /destinations
   def index
@@ -10,6 +10,9 @@ class DestinationsController < ApplicationController
 
   # GET /destinations/1
   def show
+
+    destination = Destination.find_by(id: params[:id])
+
     if destination 
       render json: destination
     else
@@ -30,6 +33,9 @@ class DestinationsController < ApplicationController
 
   # PATCH/PUT /destinations/1
   def update
+
+    destination = Destination.find_by(id: params[:id])
+
     if destination.update(destination_params)
       render json: destination
     else
@@ -39,6 +45,8 @@ class DestinationsController < ApplicationController
 
   # DELETE /destinations/1
   def destroy
+    destination = Destination.find_by(id: params[:id])
+
     destination.destroy
   end
 
