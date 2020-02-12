@@ -78,24 +78,34 @@ function getDestinations() {
 // }
 
 function displayCreateDestinationForm() {
-  let frm = document.getElementById("dest-form");
+  let frmWrapper = document.getElementById("dest-form-container");
+  let frmHTML = `
+    <div id="dest-form">
+      <br>
+      <form onsubmit="createDestination();return false;">
+          <label for="name">Name:</label>
+          <input type="text" id="name">
+          <label for="country">Country:</label>
+          <input type="text" id="country">
+          <label for="language">Language:</label>
+          <input type="text" id="language">
+          <label for="currency">Currency:</label>
+          <input type="text" id="currency">
+          <input type ="submit" value="Add New Destination">
+          <br>
+      </form>
+    </div> 
+    `
+    frmWrapper.innerHTML = frmHTML;
 
-  //first clear form
-  // now make form visible
-  frm.style.visibility="visible";
-
-  // can I change the listener on the form to call create destination?
-  console.log("fillout form now")
-
-  //after all the processing clear form make the form disappear
-  //x.style.visibility="hidden";
   }
 
-  function createDestination (e) {
-    // from event object, get attributes and build destination Object to pass to fetch
+  function createDestination () {
     //const destinationObj = new Destination ( { "name": e.target. , country:  }
-    const inputDest = {
-      name: document.getElementById('description').value,
+    //document.forms["dest-form"].getElementsByTagName("input");
+
+    let inputDest = {
+      name: document.getElementById('name').value,
       country: document.getElementById('country').value,
       currency: document.getElementById('currency').value,
       language: document.getElementById('language').value

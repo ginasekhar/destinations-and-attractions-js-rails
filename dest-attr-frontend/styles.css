@@ -19,11 +19,6 @@ body {
     margin: 0;
   }
   
-  nav-bar {
-    width: 80%;
-    margin:0 auto;
-  }
-
   .nav-bar {
     width: 80%;
     margin: 0 auto;
@@ -75,17 +70,6 @@ body {
     width: 100%;
   }
   
-  div.card {
-    background-color: #eeeeee;
-    height: 250px;
-    width: 300px;
-    box-shadow: 10px 10px grey;
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  
-  
   li {
     font-size: 1.2em;
     list-style: none;
@@ -99,13 +83,6 @@ body {
     border-radius: 10px;
   }
   
-  button.exclude {
-    float: right;
-    background-color: rgb(226, 168, 43);
-  }
-  
-  
-
   @media only screen and (min-width: 500px) {
     main {
       grid-template-columns: 1fr 1fr;
@@ -125,39 +102,41 @@ body {
   color: #6C4719
 }
 
-
+#dest-form {
+  background-color:#F8EFCC ;
+  visibility: visible;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px;
+}
 
 .column-layout {
   max-width: 1400px;
   background-color: #FFF;
-  margin: 40px auto 0 auto;
+  margin: 10px auto 0 auto;
   line-height: 1.65;
-  padding: 20px 50px;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
 }
 
 .dest-list{
-  flex: 2;
-  order: 2;
-  background-color: #c0dbe2
-}
-
-#dest-form {
   flex: 1;
   order: 1;
-  background-color:#c0dbe2;
-  visibility: visible;
+  background-color: #c0dbe2;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+
 .dest-details {
-  flex: 3;
-  order: 3;
+  flex: 2;
+  order: 2;
   background-color: #c0dbe2;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .dest-details p {
   font-size: 1.2em;
   color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 

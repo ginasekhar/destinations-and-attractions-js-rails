@@ -9,51 +9,41 @@
     <header>
       <div class="nav-bar">
         <h1 class="logo"> Travel Destinations</h1>
-          <nav>
-          <ul>
-            <li><a href="#" onclick='displayCreateDestinationForm();return false;'>New Destination</a></li>
-            <li><a href="#" onclick='displayCreateAttractionForm();return false;'>New Attraction</a></li>
-          </ul>
-        </nav>
       </div>
     </header>
 
     <main>
-      <!-- column-layout is the wrapper for all 3 sections -->
+      <!-- dest-form is the form for adding or updating destinations -->
+      <div id="dest-form-container">
+        <div id="dest-form">
+          <br>
+          <form onsubmit="createDestination();return false;">
+              <label for="name">Name:</label>
+              <input type="text" id="name">
+              <label for="country">Country:</label>
+              <input type="text" id="country">
+              <label for="language">Language:</label>
+              <input type="text" id="language">
+              <label for="currency">Currency:</label>
+              <input type="text" id="currency">
+              <input type ="submit" value="Add New Destination">
+              <br>
+          </form>
+        </div>
+      </div>
+
+      <!-- column-layout is the wrapper for 2 sections -->
       
       <div class="column-layout" >
         <!-- dest-list is the list of all destinations in database -->
         <div class="dest-list" id="dest-list-container">
+          <button id="btn-add-dest" onclick="displayCreateDestinationForm()"; return false;>Add New Destination</button>
           <ul>
 
           </ul>
         </div>
 
-        <!-- dest-form is the form for adding or updating destinations -->
-        <div id="dest-form">
-          <form onsubmit="createDestination();return false;">
-            <div class="dest-form-row">
-              <label for="name">Name:</label>
-              <input type="text" id="name">
-            </div>
-            <div class="dest-form-row">
-              <label for="country">Country:</label>
-              <input type="text" id="country">
-            </div>
-            <div class="dest-form-row">
-              <label for="language">Language:</label>
-              <input type="text" id="language">
-            </div>
-            <div class="dest-form-row">
-              <label for="currency">Currency:</label>
-              <input type="text" id="currency">
-            </div>
-            <div class="dest-form-row">
-              <input type ="submit" value="Add New Destination">
-            </div> 
-          </form>
-        </div>
-
+        
         <!-- dest-details is the container that will show the details of destination 
           and list all associated attractions -->
 
