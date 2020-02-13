@@ -46,8 +46,8 @@ class DestinationsController < ApplicationController
   # DELETE /destinations/1
   def destroy
     destination = Destination.find_by(id: params[:id])
-
-    destination.destroy
+    render json: destination.errors, status: :unprocessable_entity if !destination.destroy
+  
   end
 
   private
