@@ -21,3 +21,19 @@ main {
   <li><a href="#" onclick='displayCreateDestinationForm();return false;'>New Destination</a></li>
   </ul>
 </nav>
+
+<div id="dest-form">
+          <br>
+          <form onsubmit="createDestination();return false;">
+              <label for="name">Name:</label>
+              <input type="text" id="name">
+              <label for="country">Country:</label>
+              <input type="text" id="country">
+              <label for="language">Language:</label>
+              <input type="text" id="language">
+              <label for="currency">Currency:</label>
+              <input type="text" id="currency">
+              <input type ="submit" value="Add New Destination">
+              <br>
+          </form>
+        </div>
