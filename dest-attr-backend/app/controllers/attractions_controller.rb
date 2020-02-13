@@ -10,6 +10,8 @@ class AttractionsController < ApplicationController
 
   # GET /attractions/1
   def show
+    attraction = Attraction.find_by(id: params[:id])
+
     render json: attraction
   end
 
@@ -17,7 +19,7 @@ class AttractionsController < ApplicationController
   def create
     attraction = Attraction.new(attraction_params)
 
-    if @attraction.save
+    if attraction.save
       render json: attraction, status: :created, location: @attraction
     else
       render json: attraction.errors, status: :unprocessable_entity
@@ -26,6 +28,8 @@ class AttractionsController < ApplicationController
 
   # PATCH/PUT /attractions/1
   def update
+    attraction = Attraction.find_by(id: params[:id])
+    
     if attraction.update(attraction_params)
       render json: attraction
     else

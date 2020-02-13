@@ -14,17 +14,14 @@
 
     <main>
       <!-- dest-form is the form for adding or updating destinations -->
-      <div id="dest-form-container">
-        
-      </div>
-
+      <div id="dest-form-container" class="bg-modal">  </div>
 
       <!-- column-layout is the wrapper for 2 sections -->
       
-      <div class="column-layout" >
+      <div class="column-layout" id="dest-attr-display-wrapper">
         <!-- dest-list is the list of all destinations in database -->
         <div class="dest-list" id="dest-list-container">
-          <button id="btn-add-dest" onclick="displayCreateDestinationForm()"; return false;>Add New Destination</button>
+          <button id="btn-add-dest" class="modal-button" onclick="displayCreateDestinationForm()"; return false;>Add New Destination</button>
           <ul>
 
           </ul>

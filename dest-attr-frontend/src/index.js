@@ -5,6 +5,14 @@ const ATTRACTIONS_URL = `${BASE_URL}/attractions`
 
 document.addEventListener("DOMContentLoaded", ()=>{
   getDestinations();
+
+  // document.getElementById('dest-form-container').addEventListener("click", (e) => {
+  //   document.querySelector('.bg-modal').style.display = "flex";
+  // });
+  
+  // document.querySelector('.close').addEventListener("click", (e) => {
+  //   document.querySelector('.bg-modal').style.display = "none";
+  // });
 })
 
 class Destination {
@@ -34,6 +42,16 @@ class Destination {
     delBtn.setAttribute('class', 'del-dest');
     delBtn.innerText = "Delete"
     li.append(delBtn)
+
+    let edtBtn = document.createElement("button");
+    edtBtn.setAttribute("data-destination-id", this.id);
+    edtBtn.setAttribute('class', 'edt-dest');
+    edtBtn.innerText = "Edit"
+    edtBtn.addEventListener('click', (e) => {
+      editDestination(e)
+    });
+    li.append(edtBtn);
+
     ul.appendChild(li);
 
     showBtn.addEventListener('click', (e) => {
@@ -42,6 +60,10 @@ class Destination {
   
     delBtn.addEventListener('click', (e) => {
       deleteDestination(e)
+    });
+
+    edtBtn.addEventListener('click', (e) => {
+      editDestination(e)
     });
   
   }
@@ -81,67 +103,82 @@ function getDestinations() {
 
 function displayCreateDestinationForm() {
   let frmWrapper = document.getElementById("dest-form-container");
+  
   let frmHTML = `
-    <div id="dest-form">
-      <br>
-      <form onsubmit="createDestination();return false;">
-          <label for="name">Name:</label>
-          <input type="text" id="name">
-          <label for="country">Country:</label>
-          <input type="text" id="country">
-          <label for="language">Language:</label>
-          <input type="text" id="language">
-          <label for="currency">Currency:</label>
-          <input type="text" id="currency">
-          <input type ="submit" value="Add New Destination">
-          <br>
-      </form>
+    <div id="dest-form" class="modal-content">
+      <div class="modal-header">
+        <div id="close-dest" class="close">&times;</div>
+        <h2> Add New Destination</h2>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="createDestination();return false;">
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+            <label for="country">Country:</label>
+            <input type="text" id="country">
+            <label for="language">Language:</label>
+            <input type="text" id="language">
+            <label for="currency">Currency:</label>
+            <input type="text" id="currency">
+            <input type ="submit" value="Add New Destination">
+            <br>
+        </form>
     </div> 
     `
     frmWrapper.innerHTML = frmHTML;
+    frmWrapper.style.display = 'block';
+
+    const closeBtn = document.getElementById("close-dest");
+    closeBtn.addEventListener('click', () => {
+      let frmWrapper = document.getElementById("dest-form-container");
+      frmWrapper.style.display = 'none';
+    });
+
+    // Add code to handle outside click
+    ///window.addEventListener('click', outsideClick);
 
   }
 
   function createDestination () {
-    //const destinationObj = new Destination ( { "name": e.target. , country:  }
-    //document.forms["dest-form"].getElementsByTagName("input");
-
+    
     let inputDest = {
       name: document.getElementById('name').value,
       country: document.getElementById('country').value,
       currency: document.getElementById('currency').value,
       language: document.getElementById('language').value
-  }
+    }
 
   //const destinationObj = (({'description', 'country', 'currency', 'language'}) => ({ 'description', 'country', 'currency', 'language' }))(inputDest);
 
   
-  fetch(DESTINATIONS_URL,{
-      method: "POST",
-      body: JSON.stringify(inputDest),
-      headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-      }
-  })
-  .then(resp => resp.json())
-  .then(dest => {
-    let newDest = new Destination(dest);
-    //add new destination to page
-    newDest.renderDest();
+    fetch(DESTINATIONS_URL,{
+        method: "POST",
+        body: JSON.stringify(inputDest),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(dest => {
+      let newDest = new Destination(dest);
+      //add new destination to page
+      newDest.renderDest();
 
-    //frm.reset();
-    let frmWrapper = document.getElementById("dest-form-container");
-    frmWrapper.innerHTML = "";
-  })
-  .catch((error) => {
-    console.log(error)
-  }); 
+      //frm.reset();
+      let frmWrapper = document.getElementById("dest-form-container");
+      frmWrapper.innerHTML = "";
+      frmWrapper.style.display = 'none';
+    })
+    .catch((error) => {
+      console.log(error)
+    }); 
   }
   
   function viewDestination(event){
     event.preventDefault();
     let dstDetails = document.querySelector(".dest-details p");
+    
   
     dstDetails.innerHTML = ""
   
@@ -154,7 +191,7 @@ function displayCreateDestinationForm() {
       let dest = new Destination(data)
     
       dstDetails.innerHTML = 
-        `<strong>Destination:</strong> ${dest.name} (${dest.country}) <strong>Currency:</strong> ${dest.currency}  <strong>Language:</strong> ${dest.language} <br> `;
+        `<center><strong>Destination:</strong> ${dest.name} (${dest.country}) <strong>Currency:</strong> ${dest.currency}  <strong>Language:</strong> ${dest.language} </center> <br> `;
       let addBtn = document.createElement("button");
       addBtn.setAttribute("data-attr-destination-id", id);
       addBtn.setAttribute('class', 'add-attr');
@@ -166,7 +203,7 @@ function displayCreateDestinationForm() {
 
       let attrListDiv = document.querySelector(".attr-list ul");
       // clear attraction list before populating with fetched ones 
-      attrListDiv.innerHTML = '<center><h3> Attractions </h3> </center> <br>'
+      attrListDiv.innerHTML = '<center><h4> Attractions </h4> </center> <br>'
 
       if (data["attractions"].length > 0) {
         data["attractions"].forEach(attr => {
@@ -182,6 +219,10 @@ function displayCreateDestinationForm() {
       console.log(error)
     }); 
   
+  }
+
+  function editDestination(e) {
+
   }
   
   function deleteDestination(dest){
@@ -213,6 +254,7 @@ class Attraction {
     this.category = attr.category
     this.reservations_required = attr.reservations_required
     this.cost = attr.cost
+    this.destinationId = attr.destination_id
   }
 
   renderAttr() {
@@ -228,14 +270,7 @@ class Attraction {
       deleteAttraction(e)
     });
     li.append(del_btn);
-    let edt_btn = document.createElement("button");
-    edt_btn.setAttribute("data-attraction-id", this.id);
-    edt_btn.setAttribute('class', 'edt-attr');
-    edt_btn.innerText = "Edit"
-    edt_btn.addEventListener('click', (e) => {
-      editAttraction(e)
-    });
-    li.append(edt_btn);
+    
     attrListDiv.appendChild(li);
   }
 }
@@ -250,10 +285,12 @@ function displayCreateAttractionForm(e) {
   
   
   let frmHTML = `
-    <div id="add-attr-form">
-      <br>
-      <form onsubmit="createAttraction();return false;">
-          <input id="destinationId" name="destinationId" type="hidden" value="${destinationId}">
+    <div id="add-attr-form" class="modal-content">
+      <div class="modal-header">
+        <div class="close">+</div>
+        <br>
+        <form onsubmit="createAttraction();return false;">
+          <input id="destination_id" name="destination_id" type="hidden" value="${destinationId}">
           <label for="name">Name:</label>
           <input type="text" id="name">
           <label for="category">Category:</label>
@@ -264,7 +301,8 @@ function displayCreateAttractionForm(e) {
           <input type="number" id="cost">
           <input type ="submit" value="Add New Attraction">
           <br>
-      </form>
+        </form>
+      </div>  
     </div> 
     `
     frmWrapper.innerHTML = frmHTML;
@@ -279,11 +317,9 @@ function createAttraction(){
   const name = document.getElementById('name').value;
   const category = document.getElementById('category').value;
   const cost = document.getElementById('cost').value;
-  let attractionObj = new Attraction ({name: name, 
-                                        category: category,  
-                                        reservations_required: reservationsRequired,
-                                        cost: cost 
-  })
+  const destinationId = document.getElementById('destination_id').value;
+  let attractionObj = {name: name, category: category,  reservations_required: reservationsRequired,
+                      cost: cost, destination_id: destinationId};
   
   let configObj = {
       method: "POST",
