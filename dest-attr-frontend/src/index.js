@@ -5,14 +5,6 @@ const ATTRACTIONS_URL = `${BASE_URL}/attractions`
 
 document.addEventListener("DOMContentLoaded", ()=>{
   getDestinations();
-
-  // document.getElementById('dest-form-container').addEventListener("click", (e) => {
-  //   document.querySelector('.bg-modal').style.display = "flex";
-  // });
-  
-  // document.querySelector('.close').addEventListener("click", (e) => {
-  //   document.querySelector('.bg-modal').style.display = "none";
-  // });
 })
 
 class Destination {
@@ -43,14 +35,14 @@ class Destination {
     delBtn.innerText = "Delete"
     li.append(delBtn)
 
-    let edtBtn = document.createElement("button");
-    edtBtn.setAttribute("data-destination-id", this.id);
-    edtBtn.setAttribute('class', 'edt-dest');
-    edtBtn.innerText = "Edit"
-    edtBtn.addEventListener('click', (e) => {
-      editDestination(e)
-    });
-    li.append(edtBtn);
+    // let edtBtn = document.createElement("button");
+    // edtBtn.setAttribute("data-destination-id", this.id);
+    // edtBtn.setAttribute('class', 'edt-dest');
+    // edtBtn.innerText = "Edit"
+    // edtBtn.addEventListener('click', (e) => {
+    //   editDestination(e)
+    // });
+    // li.append(edtBtn);
 
     ul.appendChild(li);
 
@@ -62,9 +54,9 @@ class Destination {
       deleteDestination(e)
     });
 
-    edtBtn.addEventListener('click', (e) => {
-      editDestination(e)
-    });
+    // edtBtn.addEventListener('click', (e) => {
+    //   editDestination(e)
+    // });
   
   }
 }
@@ -97,10 +89,6 @@ function getDestinations() {
   }); 
 }
 
-// function clearDestinationForm(){
-//   let destListDiv = document.getElementById("dest-list ul")
-// }
-
 function displayCreateDestinationForm() {
   let frmWrapper = document.getElementById("dest-form-container");
   
@@ -121,9 +109,9 @@ function displayCreateDestinationForm() {
             <label for="currency">Currency:</label>
             <input type="text" id="currency">
             <input type ="submit" value="Add New Destination">
-            <br>
         </form>
-    </div> 
+      </div> 
+    </div>
     `
     frmWrapper.innerHTML = frmHTML;
     frmWrapper.style.display = 'block';
@@ -133,9 +121,6 @@ function displayCreateDestinationForm() {
       let frmWrapper = document.getElementById("dest-form-container");
       frmWrapper.style.display = 'none';
     });
-
-    // Add code to handle outside click
-    ///window.addEventListener('click', outsideClick);
 
   }
 
@@ -197,8 +182,8 @@ function displayCreateDestinationForm() {
       addBtn.setAttribute('class', 'add-attr');
       addBtn.innerText = "Add Attraction for this Destination"
       dstDetails.append(addBtn);
-      addBtn.addEventListener('click', (e) => {
-        displayCreateAttractionForm(e)
+      addBtn.addEventListener('click', () => {
+        displayCreateAttractionForm()
       })
 
       let attrListDiv = document.querySelector(".attr-list ul");
@@ -211,7 +196,7 @@ function displayCreateDestinationForm() {
           newAttr.renderAttr();
         } )
       } else {
-        dstDetails.innerHTML += `No attractions saved for this destination` 
+        dstDetails.innerHTML += ` <hr><center>No attractions saved for this destination </center>` 
       }
   
     }) // second .then
@@ -275,20 +260,20 @@ class Attraction {
   }
 }
 
-function displayCreateAttractionForm(e) {
-  e.preventDefault();
-
-  console.log("in displayCreateAttractionForm")
-
-  const frmWrapper = document.getElementById("new-attraction-form-container");
-  const destinationId = e.target.dataset.attrDestinationId
+function displayCreateAttractionForm() {
   
+  console.log("in displayCreateAttractionForm")
+  let destinationId = event.target.dataset["attrDestinationId"]
+
+  let frmWrapper = document.getElementById("new-attraction-form-container");
   
   let frmHTML = `
     <div id="add-attr-form" class="modal-content">
       <div class="modal-header">
-        <div class="close">+</div>
-        <br>
+      <div id="close-attr" class="close">&times;</div>
+      <h2> Add New Attraction</h2>
+      </div>
+      <div class="modal-body">
         <form onsubmit="createAttraction();return false;">
           <input id="destination_id" name="destination_id" type="hidden" value="${destinationId}">
           <label for="name">Name:</label>
@@ -300,13 +285,18 @@ function displayCreateAttractionForm(e) {
           <label for="cost">Cost:</label>
           <input type="number" id="cost">
           <input type ="submit" value="Add New Attraction">
-          <br>
-        </form>
-      </div>  
-    </div> 
+        </form>  
+      </div> 
+      </div> 
     `
     frmWrapper.innerHTML = frmHTML;
+    frmWrapper.style.display = 'block';
 
+    const closeBtn = document.getElementById("close-attr");
+    closeBtn.addEventListener('click', () => {
+      let frmWrapper = document.getElementById("new-attraction-form-container");
+      frmWrapper.style.display = 'none';
+    });
 }
 
 function createAttraction(){
@@ -340,6 +330,7 @@ function createAttraction(){
     //frm.reset();
     let frmWrapper = document.getElementById("new-attraction-form-container");
     frmWrapper.innerHTML = "";
+    frmWrapper.style.display = 'none';
   })
   .catch((error) => {
     console.log(error)
