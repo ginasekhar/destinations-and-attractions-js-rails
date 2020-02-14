@@ -35,14 +35,7 @@ class Destination {
     delBtn.innerText = "Delete"
     li.append(delBtn)
 
-    // let edtBtn = document.createElement("button");
-    // edtBtn.setAttribute("data-destination-id", this.id);
-    // edtBtn.setAttribute('class', 'edt-dest');
-    // edtBtn.innerText = "Edit"
-    // edtBtn.addEventListener('click', (e) => {
-    //   editDestination(e)
-    // });
-    // li.append(edtBtn);
+    
 
     ul.appendChild(li);
 
@@ -54,9 +47,7 @@ class Destination {
       deleteDestination(e)
     });
 
-    // edtBtn.addEventListener('click', (e) => {
-    //   editDestination(e)
-    // });
+    
   
   }
 }
@@ -85,7 +76,7 @@ function getDestinations() {
       
   })
   .catch((error) => {
-    console.log(error)
+    alert(`${error} on Listing All Destinations` )
   }); 
 }
 
@@ -100,15 +91,23 @@ function displayCreateDestinationForm() {
       </div>
       <div class="modal-body">
         <form onsubmit="createDestination();return false;">
+          <div class="class="dest-form-row">
             <label for="name">Name:</label>
-            <input type="text" id="name">
+            <input type="text" id="name" required>
+          </div>
+          <div class="class="dest-form-row">
             <label for="country">Country:</label>
-            <input type="text" id="country">
+            <input type="text" id="country" required>
+          </div>
+          <div class="class="dest-form-row">
             <label for="language">Language:</label>
             <input type="text" id="language">
+          </div>
+          <div class="class="dest-form-row">
             <label for="currency">Currency:</label>
             <input type="text" id="currency">
-            <input type ="submit" value="Add New Destination">
+          </div>
+            <input type="submit" value="Add New Destination">
         </form>
       </div> 
     </div>
@@ -165,7 +164,7 @@ function displayCreateDestinationForm() {
 
     })
     .catch((error) => {
-      console.log(error)
+      alert(`${error} on Creating New Destination` )
     }); 
   }
   
@@ -191,7 +190,7 @@ function displayCreateDestinationForm() {
     
       dstDetails.innerHTML = 
         `<center><strong>Destination:</strong> ${dest.name} (${dest.country}) <strong>Currency:</strong> ${dest.currency}  <strong>Language:</strong> ${dest.language} </center> <hr> `;
-        
+
       let addBtn = document.createElement("button");
       addBtn.setAttribute("data-attr-destination-id", id);
       addBtn.setAttribute('class', 'add-attr');
@@ -201,6 +200,15 @@ function displayCreateDestinationForm() {
       addBtn.addEventListener('click', () => {
         displayCreateAttractionForm()
       })
+
+      // let edtBtn = document.createElement("button");
+    // edtBtn.setAttribute("data-attr-destination-id", this.id);
+    // edtBtn.setAttribute('class', 'edt-dest');
+    // edtBtn.innerText = "Edit"
+    // edtBtn.addEventListener('click', (e) => {
+    //   editDestination(e)
+    // });
+    // dstBtnsCont.append(edtBtn);
 
       let attrListDiv = document.querySelector(".attr-list ul");
       // clear attraction list before populating with fetched ones 
@@ -218,7 +226,7 @@ function displayCreateDestinationForm() {
   
     }) // second .then
     .catch((error) => {
-      console.log(error)
+      alert(`${error} on View Destination` )
     }); 
   
   }
@@ -229,6 +237,8 @@ function displayCreateDestinationForm() {
   
   function deleteDestination(dest){
     dest.preventDefault();
+
+    if (!confirm('This will permanently delete this destination and all its attractions. Are you sure?')) { return false }
     destinationId = dest.target.dataset.destinationId;
     delete_url = `${DESTINATIONS_URL}/${destinationId}`
   
@@ -243,7 +253,7 @@ function displayCreateDestinationForm() {
     fetch(delete_url, configObj)
     .then(event.target.parentElement.remove())
     .catch((error) => {
-      console.log(error)
+      alert(`${error} on Delete Destination` )
     }); 
   }
 
@@ -294,13 +304,13 @@ function displayCreateAttractionForm() {
         <form onsubmit="createAttraction();return false;">
           <input id="destination_id" name="destination_id" type="hidden" value="${destinationId}">
           <label for="name">Name:</label>
-          <input type="text" id="name">
+          <input type="text" id="name" required>
           <label for="category">Category:</label>
           <input type="text" id="category">
           <label for="reservations_required">Reservation Required:</label>
-          <input type="checkbox" id="reservations_required">
+          <input type="checkbox" id="reservations_required" value="true">
           <label for="cost">Cost:</label>
-          <input type="number" id="cost">
+          <input type="number" id="cost" value="0">
           <input type ="submit" value="Add New Attraction">
         </form>  
       </div> 
@@ -350,7 +360,7 @@ function createAttraction(){
     frmWrapper.style.display = 'none';
   })
   .catch((error) => {
-    console.log(error)
+    alert(`${error} on Creating New Attraction` )
   }); 
 
 }
@@ -359,6 +369,9 @@ function createAttraction(){
 
 function deleteAttraction(attr){
   attr.preventDefault();
+
+  if (!confirm('This will permanently delete this attraction. Are you sure?')) { return false }
+
   attractionId = attr.target.dataset.attractionId;
   delete_url = `${ATTRACTIONS_URL}/${attractionId}`
 
@@ -373,27 +386,7 @@ function deleteAttraction(attr){
   fetch(delete_url, configObj)
   .then(event.target.parentElement.remove())
   .catch((error) => {
-    console.log(error)
+    alert(`${error} on Delete Attraction` )
   }); 
 }
-
-
-
-
-
-
-  ////
-  // Get DOM Elements
-// const modal = document.querySelector('#my-modal');
-// const modalBtn = document.querySelector('#modal-btn');
-// const closeBtn = document.querySelector('.close');
-
-// // Events
-// modalBtn.addEventListener('click', openModal);
-// closeBtn.addEventListener('click', closeModal);
-// window.addEventListener('click', outsideClick);
-  
-  
-  
-    
     
