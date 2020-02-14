@@ -14,7 +14,9 @@
 
     <main>
       <!-- dest-form is the form for adding or updating destinations -->
-      <div id="dest-form-container" class="bg-modal">  </div>
+      <div id="dest-form-container" class="bg-modal">  
+        <!-- dest-form is built in function displayCreateDestinationForm -->
+      </div>
 
       <!-- column-layout is the wrapper for 2 sections -->
       
@@ -23,30 +25,30 @@
         <div class="dest-list" id="dest-list-container">
           <button id="btn-add-dest" class="modal-button" onclick="displayCreateDestinationForm()"; return false;>Add New Destination</button>
           <ul>
-
+            <!-- Function renderDestination will add the li's of all destinations getDestinations fetches -->
           </ul>
         </div>
 
-        
         <!-- dest-details is the container that will show the details of destination 
           and list all associated attractions -->
 
         <div class="dest-details">
-          <div id="dest-core-info">
-            <p></p>
-          </div>
-          <div id="new-attraction-form-container" class="bg-modal"></div>
+          <p></p>
+          
+          <div id="dest-btns-container"> </div>
+          <!-- New attractions form container is form to add attractions created in displayCreateAttractionFor -->
+          <div id="new-attraction-form-container" class="bg-modal"> </div>
+          
           <div class="attr-list" id="attr-list-container">
             <ul>
 
             </ul> 
           </div>
         </div>
-
       </div>
-
     </main>
 
     
   </body>
 </html>
+

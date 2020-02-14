@@ -149,7 +149,7 @@ function displayCreateDestinationForm() {
       let newDest = new Destination(dest);
       //add new destination to page
       newDest.renderDest();
-
+      
       //frm.reset();
       let frmWrapper = document.getElementById("dest-form-container");
       frmWrapper.innerHTML = "";
@@ -163,9 +163,13 @@ function displayCreateDestinationForm() {
   function viewDestination(event){
     event.preventDefault();
     let dstDetails = document.querySelector(".dest-details p");
+
+    let dstBtnsCont = document.getElementById("dest-btns-container");
     
   
     dstDetails.innerHTML = ""
+
+    dstBtnsCont.innerHTML = ""
   
     let id = event.target.dataset["destinationId"]
   
@@ -176,27 +180,29 @@ function displayCreateDestinationForm() {
       let dest = new Destination(data)
     
       dstDetails.innerHTML = 
-        `<center><strong>Destination:</strong> ${dest.name} (${dest.country}) <strong>Currency:</strong> ${dest.currency}  <strong>Language:</strong> ${dest.language} </center> <br> `;
+        `<center><strong>Destination:</strong> ${dest.name} (${dest.country}) <strong>Currency:</strong> ${dest.currency}  <strong>Language:</strong> ${dest.language} </center> <hr> `;
       let addBtn = document.createElement("button");
       addBtn.setAttribute("data-attr-destination-id", id);
       addBtn.setAttribute('class', 'add-attr');
-      addBtn.innerText = "Add Attraction for this Destination"
-      dstDetails.append(addBtn);
+      addBtn.innerText = "Add Attraction to Destination"
+      // dstDetails.append(addBtn);
+      dstBtnsCont.append(addBtn);
       addBtn.addEventListener('click', () => {
         displayCreateAttractionForm()
       })
 
       let attrListDiv = document.querySelector(".attr-list ul");
       // clear attraction list before populating with fetched ones 
-      attrListDiv.innerHTML = '<center><h4> Attractions </h4> </center> <br>'
+      
 
       if (data["attractions"].length > 0) {
+        attrListDiv.innerHTML = '<center><h4> Attractions </h4> </center>'
         data["attractions"].forEach(attr => {
           let newAttr = new Attraction(attr);
           newAttr.renderAttr();
         } )
       } else {
-        dstDetails.innerHTML += ` <hr><center>No attractions saved for this destination </center>` 
+        attrListDiv.innerHTML = '<hr><center>No attractions saved for this destination </center>' 
       }
   
     }) // second .then
@@ -246,7 +252,7 @@ class Attraction {
     let attrListDiv = document.querySelector(".attr-list ul");
        
     let li = document.createElement('li');
-    li.innerHTML = `<hr><strong>${this.name}</strong><strong> Category:</strong>${this.category} <strong>Reservation: </strong>${this.reservations_required ? "Required" : "Not Required"} <strong>Entry Fee : </strong>USD $${this.cost} <br>`;
+    li.innerHTML = `<hr>${this.name} (${this.category} )    |    Reservation ${this.reservations_required ? "Required" : "Not Required"}    |    Entry Fee - USD $${this.cost} <br>`;
     let del_btn = document.createElement("button");
     del_btn.setAttribute("data-attraction-id", this.id);
     del_btn.setAttribute('class', 'delete-attr');
