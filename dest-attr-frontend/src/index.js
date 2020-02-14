@@ -70,7 +70,6 @@ function getDestinations() {
       destListDiv.innerHTML = ''
       data.forEach(dest => {
         let newDest = new Destination(dest);
-        //console.log(newDest);
         newDest.renderDest();
         });
       
@@ -132,9 +131,6 @@ function displayCreateDestinationForm() {
       language: document.getElementById('language').value
     }
 
-  //const destinationObj = (({'description', 'country', 'currency', 'language'}) => ({ 'description', 'country', 'currency', 'language' }))(inputDest);
-
-  
     fetch(DESTINATIONS_URL,{
         method: "POST",
         body: JSON.stringify(inputDest),
@@ -273,7 +269,10 @@ class Attraction {
     let attrListDiv = document.querySelector(".attr-list ul");
        
     let li = document.createElement('li');
-    li.innerHTML = `<hr>${this.name} (${this.category} )    |    Reservation ${this.reservations_required ? "Required" : "Not Required"}    |    Entry Fee - USD $${this.cost} <br>`;
+    
+    li.innerHTML = `<hr>${this.name} (${this.category} )    |    Reservation ${this.reservations_required ? "Required" : "Not Required"}    |   Entry Fee - USD $${this.cost} <br>`;
+
+    
     let del_btn = document.createElement("button");
     del_btn.setAttribute("data-attraction-id", this.id);
     del_btn.setAttribute('class', 'delete-attr');
@@ -289,7 +288,6 @@ class Attraction {
 
 function displayCreateAttractionForm() {
   
-  console.log("in displayCreateAttractionForm")
   let destinationId = event.target.dataset["attrDestinationId"]
 
   let frmWrapper = document.getElementById("new-attraction-form-container");
@@ -308,9 +306,9 @@ function displayCreateAttractionForm() {
           <label for="category">Category:</label>
           <input type="text" id="category">
           <label for="reservations_required">Reservation Required:</label>
-          <input type="checkbox" id="reservations_required" value="true">
+          <input type="checkbox" name="reservations_required" id="reservations_required" value="true">
           <label for="cost">Cost:</label>
-          <input type="number" id="cost" value="0">
+          <input type="number" id="cost" value=0>
           <input type ="submit" value="Add New Attraction">
         </form>  
       </div> 
@@ -327,10 +325,8 @@ function displayCreateAttractionForm() {
 }
 
 function createAttraction(){
-  
-  // remember to translate check box to boolean
-  
-  const reservationsRequired = document.getElementById('reservations_required').value ? true : false ;
+    
+  const reservationsRequired = document.getElementById('reservations_required').checked;
   const name = document.getElementById('name').value;
   const category = document.getElementById('category').value;
   const cost = document.getElementById('cost').value;
