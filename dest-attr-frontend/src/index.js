@@ -154,14 +154,24 @@ function displayCreateDestinationForm() {
       let frmWrapper = document.getElementById("dest-form-container");
       frmWrapper.innerHTML = "";
       frmWrapper.style.display = 'none';
+
+      //clear right side of form
+      let dstDetails = document.querySelector(".dest-details p");
+      let dstBtnsCont = document.getElementById("dest-btns-container");
+      let attrListDiv = document.querySelector(".attr-list ul");
+      dstDetails.innerHTML = ""
+      dstBtnsCont.innerHTML = ""
+      attrListDiv.innerHTML = ''
+
     })
     .catch((error) => {
       console.log(error)
     }); 
   }
   
-  function viewDestination(event){
-    event.preventDefault();
+  // function viewDestination(event){
+  //   event.preventDefault();
+  function viewDestination(){
     let dstDetails = document.querySelector(".dest-details p");
 
     let dstBtnsCont = document.getElementById("dest-btns-container");
@@ -181,6 +191,7 @@ function displayCreateDestinationForm() {
     
       dstDetails.innerHTML = 
         `<center><strong>Destination:</strong> ${dest.name} (${dest.country}) <strong>Currency:</strong> ${dest.currency}  <strong>Language:</strong> ${dest.language} </center> <hr> `;
+        
       let addBtn = document.createElement("button");
       addBtn.setAttribute("data-attr-destination-id", id);
       addBtn.setAttribute('class', 'add-attr');
