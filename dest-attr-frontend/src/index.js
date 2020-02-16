@@ -106,7 +106,7 @@ function displayCreateDestinationForm() {
             <label for="currency">Currency:</label>
             <input type="text" id="currency">
           </div>
-            <input type="submit" value="Add New Destination">
+            <input type="submit" class="submit-btn" value="Add New Destination">
         </form>
       </div> 
     </div>
@@ -197,15 +197,6 @@ function displayCreateDestinationForm() {
         displayCreateAttractionForm()
       })
 
-      // let edtBtn = document.createElement("button");
-    // edtBtn.setAttribute("data-attr-destination-id", this.id);
-    // edtBtn.setAttribute('class', 'edt-dest');
-    // edtBtn.innerText = "Edit"
-    // edtBtn.addEventListener('click', (e) => {
-    //   editDestination(e)
-    // });
-    // dstBtnsCont.append(edtBtn);
-
       let attrListDiv = document.querySelector(".attr-list ul");
       // clear attraction list before populating with fetched ones 
       
@@ -227,9 +218,6 @@ function displayCreateDestinationForm() {
   
   }
 
-  function editDestination(e) {
-
-  }
   
   function deleteDestination(dest){
     dest.preventDefault();
@@ -247,7 +235,16 @@ function displayCreateDestinationForm() {
     };
        
     fetch(delete_url, configObj)
-    .then(event.target.parentElement.remove())
+    .then((response) => response.json())
+    .then(() => {
+      event.target.parentElement.remove();
+      let dstDetails = document.querySelector(".dest-details p");
+      let dstBtnsCont = document.getElementById("dest-btns-container");
+      let attrListDiv = document.querySelector(".attr-list ul");
+      dstDetails.innerHTML = ""
+      dstBtnsCont.innerHTML = ""
+      attrListDiv.innerHTML = ''
+    })
     .catch((error) => {
       alert(`${error} on Delete Destination` )
     }); 
@@ -380,6 +377,7 @@ function deleteAttraction(attr){
   };
      
   fetch(delete_url, configObj)
+  .then((response) => response.json())
   .then(event.target.parentElement.remove())
   .catch((error) => {
     alert(`${error} on Delete Attraction` )
