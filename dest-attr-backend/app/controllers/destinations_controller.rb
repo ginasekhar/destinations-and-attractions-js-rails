@@ -3,7 +3,7 @@ class DestinationsController < ApplicationController
 
   # GET /destinations
   def index
-    destinations = Destination.all.order(:name)
+    destinations = Destination.all
 
     render json: destinations
   end
