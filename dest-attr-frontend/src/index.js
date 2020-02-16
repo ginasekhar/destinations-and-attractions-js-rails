@@ -60,7 +60,7 @@ function getDestinations() {
     if (response.ok) {
       return response.json();
     } else {
-      throw new Error('Could not fetch data');
+      throw new Error('Could not fetch all destinations');
     }
   })
   .then((data) => {
@@ -130,7 +130,6 @@ function displayCreateDestinationForm() {
       currency: document.getElementById('currency').value,
       language: document.getElementById('language').value
     }
-
     fetch(DESTINATIONS_URL,{
         method: "POST",
         body: JSON.stringify(inputDest),
@@ -139,29 +138,34 @@ function displayCreateDestinationForm() {
             'Accept': 'application/json'
         }
     })
-    .then(resp => resp.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Could not create destination');
+      }
+    })
     .then(dest => {
       let newDest = new Destination(dest);
       //add new destination to page
       newDest.renderDest();
       
-      //frm.reset();
+      //Clear the input form and make it invisible
       let frmWrapper = document.getElementById("dest-form-container");
       frmWrapper.innerHTML = "";
       frmWrapper.style.display = 'none';
-
-      //clear right side of form
-      let dstDetails = document.querySelector(".dest-details p");
-      let dstBtnsCont = document.getElementById("dest-btns-container");
-      let attrListDiv = document.querySelector(".attr-list ul");
-      dstDetails.innerHTML = ""
-      dstBtnsCont.innerHTML = ""
-      attrListDiv.innerHTML = ''
-
     })
     .catch((error) => {
       alert(`${error} on Creating New Destination` )
     }); 
+
+    //clear right side of the page that still may have previously viewed has attractions
+    let dstDetails = document.querySelector(".dest-details p");
+    let dstBtnsCont = document.getElementById("dest-btns-container");
+    let attrListDiv = document.querySelector(".attr-list ul");
+    dstDetails.innerHTML = ""
+    dstBtnsCont.innerHTML = ""
+    attrListDiv.innerHTML = ''
   }
   
   // function viewDestination(event){
@@ -180,7 +184,13 @@ function displayCreateDestinationForm() {
   
     showURL = DESTINATIONS_URL + `/${id}`;
     fetch(showURL)
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Could not retrieve destination');
+      }
+    })
     .then( (data) => {
       let dest = new Destination(data)
     
@@ -222,7 +232,10 @@ function displayCreateDestinationForm() {
   function deleteDestination(dest){
     dest.preventDefault();
 
+    let parentElement = event.target.parentElement;
+    
     if (!confirm('This will permanently delete this destination and all its attractions. Are you sure?')) { return false }
+
     destinationId = dest.target.dataset.destinationId;
     delete_url = `${DESTINATIONS_URL}/${destinationId}`
   
@@ -235,15 +248,18 @@ function displayCreateDestinationForm() {
     };
        
     fetch(delete_url, configObj)
-    .then((response) => response.json())
-    .then(() => {
-      event.target.parentElement.remove();
-      let dstDetails = document.querySelector(".dest-details p");
-      let dstBtnsCont = document.getElementById("dest-btns-container");
-      let attrListDiv = document.querySelector(".attr-list ul");
-      dstDetails.innerHTML = ""
-      dstBtnsCont.innerHTML = ""
-      attrListDiv.innerHTML = ''
+    .then((response) => {
+      if (response.ok) {
+        parentElement.remove();
+        let dstDetails = document.querySelector(".dest-details p");
+        let dstBtnsCont = document.getElementById("dest-btns-container");
+        let attrListDiv = document.querySelector(".attr-list ul");
+        dstDetails.innerHTML = ""
+        dstBtnsCont.innerHTML = ""
+        attrListDiv.innerHTML = ''
+      } else {
+        throw new Error('Could not delete destination');
+      }
     })
     .catch((error) => {
       alert(`${error} on Delete Destination` )
@@ -341,7 +357,13 @@ function createAttraction(){
   };
      
   fetch(ATTRACTIONS_URL, configObj)
-  .then(resp => resp.json())
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Attraction not created');
+    }
+  })
   .then(attr => {
     let newAttr = new Attraction(attr);
     //add new destination to page
@@ -363,6 +385,8 @@ function createAttraction(){
 function deleteAttraction(attr){
   attr.preventDefault();
 
+  let parentElement = event.target.parentElement;
+
   if (!confirm('This will permanently delete this attraction. Are you sure?')) { return false }
 
   attractionId = attr.target.dataset.attractionId;
@@ -377,10 +401,15 @@ function deleteAttraction(attr){
   };
      
   fetch(delete_url, configObj)
-  .then((response) => response.json())
-  .then(event.target.parentElement.remove())
+  .then((response) => {
+    if (response.ok) {
+      parentElement.remove()
+    } else {
+      throw new Error('Could not delete attraction');
+    }
+  })
   .catch((error) => {
     alert(`${error} on Delete Attraction` )
   }); 
+
 }
-    
