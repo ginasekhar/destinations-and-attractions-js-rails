@@ -1,39 +1,16 @@
 # destinations-and-attractions-js-rails
 
-# this is a test
-//CSS
+* Ruby version 
+      2.6.1
 
-main {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-gap: 20px;
-    padding-top: 10px;
-    padding-bottom: 30px;
-  }
+* System dependencies
+      This project uses the following gems:
+            active_model_serializers
+           
+* Database creation
+      cd dest-attr-backend
+      rake db:migrate
 
-
-
-<nav>
-  <ul>
-  <li><a href="#" onclick='getDestinations();return false;'>All Destinations</a></li>
-  <li><a href="#" onclick='displayCreateAttractionForm();return false;'>New Attraction</a></li>
-  <li><a href="#" onclick='displayCreateDestinationForm();return false;'>New Destination</a></li>
-  </ul>
-</nav>
-
-<div id="dest-form">
-          <br>
-          <form onsubmit="createDestination();return false;">
-              <label for="name">Name:</label>
-              <input type="text" id="name">
-              <label for="country">Country:</label>
-              <input type="text" id="country">
-              <label for="language">Language:</label>
-              <input type="text" id="language">
-              <label for="currency">Currency:</label>
-              <input type="text" id="currency">
-              <input type ="submit" value="Add New Destination">
-              <br>
-          </form>
-        </div>
+* How to run the test suite
+      Open dest-attr-frontend/index.html in a browser window. Upon login, the program will retrieve all destinations in the database. Click on the 'Add destination' button to add a new destination.  Click on the view button next to each destination see more details about that destination. Once you are viewing a destination, click on the 'Add attraction' button to add attractions to that destination. To delete an attraction, click the 'Delete' button under the attraction.  
+      A destination can be deleted by clicking the 'Delete' button next to it. The user will be prompted to confirm and the destination and all associated attractions will be delete.
