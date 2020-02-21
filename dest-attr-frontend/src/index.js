@@ -14,6 +14,7 @@ class Destination {
     this.country = dest.country
     this.language = dest.language
     this.currency = dest.currency
+    this.attractions = dest.attractions
   }
 
   renderDest() {
@@ -211,9 +212,9 @@ function displayCreateDestinationForm() {
       // clear attraction list before populating with fetched ones 
       
 
-      if (data["attractions"].length > 0) {
+      if (dest.attractions.length > 0) {
         attrListDiv.innerHTML = '<center><h4> Attractions </h4> </center>'
-        data["attractions"].forEach(attr => {
+        dest.attractions.forEach(attr => {
           let newAttr = new Attraction(attr);
           newAttr.renderAttr();
         } )
